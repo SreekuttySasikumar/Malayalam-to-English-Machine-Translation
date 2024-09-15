@@ -1,0 +1,6 @@
+def translate_m2m100(text):
+    m2m100_tokenizer.src_lang = "ml"
+    encoded_text = m2m100_tokenizer(text, return_tensors="pt")
+    generated_tokens = m2m100_model.generate(**encoded_text, forced_bos_token_id=m2m100_tokenizer.get_lang_id("en"))
+    translated_text = m2m100_tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
+    return translated_text
