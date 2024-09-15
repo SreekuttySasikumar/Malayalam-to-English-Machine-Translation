@@ -1,0 +1,6 @@
+def translate_marian(text):
+    preprocessed_text = preprocess_text(text)
+    tokens = marian_tokenizer(preprocessed_text, return_tensors='pt', padding=True, truncation=True)
+    translated = marian_model.generate(**tokens)
+    translation = marian_tokenizer.decode(translated[0], skip_special_tokens=True)
+    return translation
