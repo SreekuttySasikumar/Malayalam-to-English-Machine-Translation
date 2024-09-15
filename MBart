@@ -1,0 +1,6 @@
+def translate_mbart(text):
+    mbart_tokenizer.src_lang = "ml_IN"
+    encoded = mbart_tokenizer(text, return_tensors='pt')
+    generated_tokens = mbart_model.generate(**encoded, forced_bos_token_id=mbart_tokenizer.lang_code_to_id["en_XX"])
+    translated_text = mbart_tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)[0]
+    return translated_text
